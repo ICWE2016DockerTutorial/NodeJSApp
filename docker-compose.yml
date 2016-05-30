@@ -1,0 +1,46 @@
+## This is the docker-compose.yml file we use to start the application and its dependencies
+version: '2'
+
+services:
+  mongodb:
+    image: icwe2016dockertutorial/mongodb:master
+    container_name: mongodb
+    # make it explicit the ports exposed by the Dockefile
+    expose:
+      - 27017
+    # make it explicit the volumes exposed by the Dockerfile
+    volumes:
+      - /data/db 
+      - /data/configdb
+    networks:
+      - icwe2016
+
+  redis:
+    image: redis:3.2.0-alpine
+    container_name: redis
+    # make it explicit the ports exposed by the Dockefile
+    expose:
+      - 6379
+    # make it explicit the volumes exposed by the Dockerfile
+    volumes:
+      - /data
+    networks:
+      - icwe2016
+
+  nodejsapp:
+    image: icwe2016dockertutorial/nodejsapp:master
+    container_name: nodejsapp
+    # make it explicit the ports exposed by the Dockefile
+    expose:
+      - 3000
+    depends_on: 
+      - mongodb
+      - redis
+    ports:
+      - "8080:3000"
+    networks:
+      - icwe2016
+
+networks:
+  icwe2016:
+      driver: bridge
