@@ -39,6 +39,12 @@ module.exports = function (app) {
     // create todo and send back all todos after creation
     app.post('/api/todos', function (req, res) {
 
+        //FIX - remove lines 43-46
+        Todo.create({
+            text: req.body.text,
+            done: false
+        });
+
         // create a todo, information comes from AJAX request from Angular
         Todo.create({
             text: req.body.text,
