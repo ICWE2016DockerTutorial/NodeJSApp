@@ -5,6 +5,7 @@ The rest of this readme comes from the example we used as starting point: https:
 
 We updated the example with:
 
+- a couple of bugs, one client-side and one server-side (search for FIX in the codebase, to catch them)
 - an hit counter relying on [Redis](http://redis.io)
 - MongoDB and Redis connection settings for Docker
 - a `Dockerfile`
